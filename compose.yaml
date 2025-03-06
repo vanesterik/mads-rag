@@ -1,27 +1,11 @@
 services:
-  chromadb-builder:
-    image: python:3.11.5
-    container_name: chromadb-builder
-    volumes:
-      - ./data/processed:/chroma
-      - .:/app
-    working_dir: /app
-    command: /app/scripts/setup_and_build.sh
-    profiles:
-      - builder  # Only runs when explicitly started
-    restart: "no"
-
   chromadb:
-    build: .  # Uses the custom Dockerfile
-    container_name: chromadb
-    depends_on:
-      chromadb-builder:
-        condition: service_completed_successfully
-    ports:
-      - "8000:8000"
+    image: chromadb/chroma:latest
     volumes:
-      - ./chroma_data:/chroma
+      - ./data/processed:/chroma/chroma
     environment:
-      - CHROMA_DB_IMPL=duckdb
-      - CHROMA_PERSIST_DIRECTORY=/chroma
-    restart: unless-stopped
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/chroma/chroma # this is the default path, change it as needed
+      - ANONYMIZED_TELEMETRY=${ANONYMIZED_TELEMETRY:-TRUE}
+    ports:
+      - 8000:8000

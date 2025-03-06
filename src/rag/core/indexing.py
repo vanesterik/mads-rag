@@ -18,14 +18,19 @@ def index_corpus(corpus: List[str]) -> None:
 
     """
 
+    # Create ChromaDB client and collection
+    client = chromadb.PersistentClient(path=COLLECTION_DIR)
+
+    # Check if collection already exists
+    if COLLECTION_NAME in client.list_collections():
+        # Delete collection in order to re-index
+        client.delete_collection(name=COLLECTION_NAME)
+
     # Generate UUIDs for each document
     uuids = [str(uuid4()) for _ in range(len(corpus))]
 
-    # Create ChromaDB client and collection with local Hugging Face model
-    client = chromadb.PersistentClient(path=COLLECTION_DIR)
+    # Create collection and add documents
     collection = client.create_collection(name=COLLECTION_NAME)
-
-    # Add documents to collection
     collection.add(documents=corpus, ids=uuids)
 
 

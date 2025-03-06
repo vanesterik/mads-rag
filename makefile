@@ -38,28 +38,20 @@ build:
 
 ## Run main script
 run:
-	@pdm run ./app.py
+	@pdm run ./${PACKAGE}/core/retrieving.py
 
 
 # TEST #########################################################################
 
 ## Run tests
-test:
-	@pdm run pytest
 
 
 # LINT #########################################################################
 
 ## Lint code
 
-
 ## Format code
 
-
-## Clean up
-clean:
-	@find . -type d -name "__pycache__" -exec rm -rf {} +
-	@rm -rf ./.mypy_cache
 
 
 ################################################################################
