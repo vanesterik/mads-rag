@@ -1,0 +1,49 @@
+[project]
+name = "rag"
+version = "0.1.0"
+description = "RAG model for MADS"
+authors = [
+    {name = "Koen van Esterik", email = "kd.vanesterik@student.han.nl"},
+]
+dependencies = [
+    "chromadb>=0.6.3",
+    "fastapi>=0.115.8",
+    "halo>=0.0.31",
+    "jupyter>=1.1.1",
+    "pdfplumber>=0.11.5",
+    "pydantic>=2.10.6",
+    "pypdf>=5.3.0",
+    "uvicorn>=0.34.0",
+    "dotenv>=0.9.9",
+    "PyJWT>=2.10.1",
+    "openai>=1.65.3",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
+
+
+[tool.mypy]
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = false
+disallow_untyped_defs = true
+ignore_missing_imports = true # Don't like this, but necessary for now because mypy triggers error on imported modules
+namespace_packages = false
+no_implicit_reexport = true
+show_error_codes = true
+show_error_context = true
+strict_equality = true
+strict_optional = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_ignores = true
