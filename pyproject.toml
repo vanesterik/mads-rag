@@ -7,6 +7,7 @@ authors = [
 ]
 dependencies = [
     "chromadb>=0.6.3",
+    "fastapi[standard]>=0.115.12",
     "halo>=0.0.31",
     "jupyter>=1.1.1",
     "pdfplumber>=0.11.5",

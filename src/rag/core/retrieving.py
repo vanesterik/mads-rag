@@ -1,8 +1,8 @@
 from typing import List
 
-from chromadb import Collection, HttpClient
+from chromadb import Collection
 
-from rag.common.config import COLLECTION_NAME, TOP_K
+from rag.common.config import TOP_K
 
 
 def retrieve_documents(collection: Collection, query: str) -> List[str]:
@@ -24,16 +24,3 @@ def retrieve_documents(collection: Collection, query: str) -> List[str]:
 
     # Extract documents from results
     return [document for document in documents]
-
-
-if __name__ == "__main__":
-    # Create ChromaDB client and collection
-    client = HttpClient(host="localhost", port=8000)
-    collection = client.get_collection(name=COLLECTION_NAME)
-
-    # Query documents
-    query = "What is machine learning?"
-    documents = retrieve_documents(collection=collection, query=query)
-
-    # Print retrieved documents
-    print(documents)

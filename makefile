@@ -38,7 +38,7 @@ build:
 
 ## Run main script
 run:
-	@pdm run ./${PACKAGE}/core/retrieving.py
+	@pdm run fastapi dev ./${PACKAGE}/main.py
 
 
 # TEST #########################################################################
